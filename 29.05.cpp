@@ -1,20 +1,63 @@
-﻿// 29.05.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <iostream>
+#include <Windows.h>
 
-#include <iostream>
+using namespace std;
 
-int main()
+int main() 
 {
-    std::cout << "Hello World!\n";
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    const int size = 10;
+    double arr[size];
+
+    cout << "Введіть " << size << " чисел:\n";
+    for (int i = 0; i < size; i++)
+    {
+        cin >> arr[i];
+    }
+
+    double sumOfNegatives = 0;
+    double productBetweenMinMax = 1;
+    double productOfEvenIndexes = 1;
+    double sumBetweenFirstAndLastNegative = 0;
+    bool firstNegativeFound = false;
+
+    for (int i = 0; i < size; i++) 
+    {
+        if (arr[i] < 0) 
+        {
+            sumOfNegatives += arr[i];
+        }
+
+        if (arr[i] > arr[size - 1] && arr[i] < arr[0]) 
+        {
+            productBetweenMinMax *= arr[i];
+        }
+
+        if (i % 2 == 0) 
+        {
+            productOfEvenIndexes *= arr[i];
+        }
+
+        if (arr[i] < 0) 
+        {
+            if (!firstNegativeFound) 
+            {
+                firstNegativeFound = true;
+            }
+
+
+            else {
+                sumBetweenFirstAndLastNegative += arr[i];
+            }
+        }
+    }
+
+    cout << "Сума від'ємних чисел: " << sumOfNegatives << endl;
+    cout << "Добуток елементів, що розташовані між мінімальним та максимальним елементами: " << productBetweenMinMax << endl;
+    cout << "Добуток елементів з парними індексами: " << productOfEvenIndexes << endl;
+    cout << "Сума елементів, що розташовані між першим та останнім від'ємними елементами: " << sumBetweenFirstAndLastNegative << endl;
+
+    return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
